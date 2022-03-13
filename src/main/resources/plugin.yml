@@ -1,0 +1,13 @@
+name: Combat
+main: ru.enfordert.Main
+version: 1.0
+description: similar as Hypixel`s pvp system lol
+api-version: 1.13
+softdepend: [PlacegolderAPI]
+commands:
+  setreach:
+    usage: /<command>
+  setrodspeed:
+    usage: /<command>
+  setVelocity:
+    usage: /<command>
