@@ -1,5 +1,7 @@
 package ru.enfordert.listeners;
 
+import net.md_5.bungee.api.chat.ClickEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import ru.enfordert.Main;
 import net.minecraft.server.v1_8_R3.*;
 import org.bukkit.*;
@@ -17,13 +19,13 @@ import java.text.DecimalFormat;
 public class Listeners implements Listener {
 
     double distance;
-    Player damaged;
-    Player playerCheater;
+    Player p, playerCheater, damaged;
 
     @EventHandler
     public void onEntityDamageByEntity(EntityDamageByEntityEvent e)
     {
-        Player p = (Player) e.getDamager();
+        if(e.getDamager() instanceof Player)
+        p = (Player) e.getDamager();
 
         if(e.getEntity() instanceof Player)
         this.playerCheater = (Player) e.getDamager();
@@ -40,9 +42,8 @@ public class Listeners implements Listener {
         this.damaged = (Player)e.getEntity();
         Vector vector = p.getLocation().getDirection();
 
-        if(e.isCancelled() || p.isOp() || !(e.getEntity() instanceof Player)) return;
+        if(e.isCancelled() || damaged.isOp() || !(damaged instanceof Player)) return;
         damaged.setVelocity(vector.multiply(Main.velocity));
-
     }
 
     private void sendMessageToAdmin(Player player) {
@@ -85,5 +86,6 @@ public class Listeners implements Listener {
             hook.setVelocity(hook.getVelocity().multiply(Main.rodSpeed));
         }
     }
+
 
 }

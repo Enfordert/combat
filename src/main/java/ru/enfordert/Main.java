@@ -1,6 +1,8 @@
 package ru.enfordert;
 
+import org.bukkit.Bukkit;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
+import org.bukkit.scoreboard.Scoreboard;
 import ru.enfordert.commands.setMaxReach;
 import ru.enfordert.commands.setRodSpeed;
 import ru.enfordert.commands.setVelocity;
@@ -18,9 +20,12 @@ public class Main extends JavaPlugin{
     public static boolean entitySpawn = false;
     public static boolean FoodLevelChange = false;
 
+    public static Scoreboard scoreBoard;
+
     public void onEnable() {
 
         getServer().getPluginManager().registerEvents(new Listeners(), this);
+        scoreBoard = Bukkit.getScoreboardManager().getMainScoreboard();
 
         getCommand("setreach").setExecutor(new setMaxReach());
         getCommand("setrodspeed").setExecutor(new setRodSpeed());
